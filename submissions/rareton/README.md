@@ -4,7 +4,7 @@ Walk your Rare Friend around a cosy pixel village, chat with villagers, grow rar
 
 **Builder:** [@gmmillar82](https://github.com/gmmillar82) · **Category:** Character Spotlight (also relevant to Economy Potential) · **SDK:** FriendSDK v0.1.2
 
-Your own Generations NFT is the main character. Its canonical on-chain sprite walks the village, and every gift you address shows the recipient Friend's sprite, read live from the public artwork registry. [Source code](https://github.com/gmmillar82/rareton/tree/c3bf477de29759720c5fbe839e36b818108d637a) · [Game rules](https://github.com/gmmillar82/rareton/blob/c3bf477de29759720c5fbe839e36b818108d637a/games/rareton/README.md)
+Your own Generations NFT is the main character. Its canonical on-chain sprite walks the village, and every gift you address shows the recipient Friend's sprite, read live from the public artwork registry. [Source code](https://github.com/gmmillar82/rareton/tree/f47aee217c9dc8ef85641a3f36d8a3a7e9ecf25d) · [Game rules](https://github.com/gmmillar82/rareton/blob/f47aee217c9dc8ef85641a3f36d8a3a7e9ecf25d/games/rareton/README.md)
 
 ## Play
 
@@ -12,12 +12,13 @@ Your own Generations NFT is the main character. Its canonical on-chain sprite wa
 
 You need a browser wallet on **Robinhood mainnet (4663)** holding a hardwired Rare Friends Generations NFT (generation ≥ 1). The SDK runtime connects the wallet and verifies ownership with a read-only check. There are no signatures, transactions or RF funding. **On mobile**, open the game inside MetaMask's in-app browser ([MetaMask link](https://metamask.app.link/dapp/gmmillar82.github.io/rareton/)); regular mobile browsers have no wallet.
 
-**Controls:** WASD / arrow keys, or tap/click where to go. Press **E**, or tap a building, flower or villager (your Friend walks over), to interact. **Satchel** shows your items and sent gifts. **Settings** has sound (off by default) and reduced motion.
+**Controls:** WASD / arrow keys, or tap/click where to go. Press **E**, or tap a building, flower or villager (your Friend walks over), to interact. **Satchel** shows your items, simulated RF balance and sent gifts. **Settings** has sound (off by default), reduced motion and a day/night toggle.
 
 **Rules:**
 - Pick daisies, tulips, bluebells, poppies and sunflowers in the east meadow, by the pond and near cottages. Each regrows 25 seconds after picking.
 - Bramble's Bakery gives free honey buns (you can carry up to 3). The wishing well gives one daisy.
 - Four villagers chat, and two of them give you gifts.
+- A village day lasts four minutes. At night the lamps glow, windows light up and fireflies come out. You can turn the cycle off in Settings.
 - At the **Seed stall**, buy a seed packet (1 RF) and plant it in the **community garden**. It blooms into one of six garden-only flowers with fixed RF values. Keep them for bouquets or sell them back at the stall.
 - At the **Post Office**, make a bouquet (1–3 flowers), a letter (6 messages) or a honey bun parcel. Type any Friend number, preview their sprite and your gift art, then press **Stamp & send**. Each gift needs a 0.1 RF stamp. Garden flowers in a bouquet carry their RF value to the recipient.
 
@@ -56,7 +57,7 @@ Node.js 22+ on Linux or Ubuntu/WSL2:
 ```sh
 git clone https://github.com/gmmillar82/rareton.git
 cd rareton
-git checkout c3bf477de29759720c5fbe839e36b818108d637a
+git checkout f47aee217c9dc8ef85641a3f36d8a3a7e9ecf25d
 npm ci
 npm run dev
 ```
@@ -71,7 +72,9 @@ All pass:
 - `friendsdk test` automated browser smoke checks at 960 px and 360 px
 - A scripted walkthrough at 960 px and 360 px (`node scripts/smoke.mjs`): walk to the post office, address a letter (with a live artwork lookup), stamp and send it, then walk to the seed stall, buy a packet, plant it and check the bloom and satchel
 
-The automated checks use the SDK's mock wallet and RPC. A real-wallet playthrough of the gifting flow on the hosted preview passed on desktop (MetaMask extension) and mobile (MetaMask in-app browser). Seed packets and stamps were added afterwards; a real-wallet check of them is pending.
+The automated checks use the SDK's mock wallet and RPC. A real-wallet playthrough on the hosted preview passed on desktop (MetaMask extension) and mobile (MetaMask in-app browser). It covered gifting, stamps, buying and planting seed packets, and the day/night cycle.
+
+`npm run build:pages && node scripts/check-pages-build.mjs` plays the exact files deployed to GitHub Pages with the mock wallet. Pages asset links carry a `?v=<commit>` version so browsers never mix cached files from different deploys. Before this fix, a stale cached runtime could block seed purchases after an update.
 
 ## Known limitations
 
