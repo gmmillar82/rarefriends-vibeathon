@@ -2,9 +2,9 @@
 
 Walk your Rare Friend around a cosy pixel village and the Whispering Woods beyond it. Chat with villagers, grow rare flowers from RF seed packets and make 16 × 16 pixel-art gifts, stamped in RF, for any other Rare Friend by number. Days turn to firefly-lit nights, rain showers pass through, and an original 8-bit waltz plays along.
 
-**Builder:** [@gmmillar82](https://github.com/gmmillar82) · **Category:** Character Spotlight (also relevant to Economy Potential) · **SDK:** FriendSDK v0.1.2
+**Builder:** [@gmmillar82](https://github.com/gmmillar82) · **Category:** Character Spotlight (also relevant to Economy Potential) · **SDK:** FriendSDK v0.1.3
 
-Your own Generations NFT is the main character. Its canonical on-chain sprite walks the village, and every gift you address shows the recipient Friend's sprite, read live from the public artwork registry. [Source code](https://github.com/gmmillar82/rareton/tree/daa18b824dbf1e2c2f94757cc8c7d300a357e2d7) · [Game rules](https://github.com/gmmillar82/rareton/blob/daa18b824dbf1e2c2f94757cc8c7d300a357e2d7/games/rareton/README.md)
+Your own Generations NFT is the main character. Its canonical on-chain sprite walks the village, and every gift you address shows the recipient Friend's sprite, read live from the public artwork registry. [Source code](https://github.com/gmmillar82/rareton/tree/c037a158fd5303b56bc474eae3f036f43a1a0415) · [Game rules](https://github.com/gmmillar82/rareton/blob/c037a158fd5303b56bc474eae3f036f43a1a0415/games/rareton/README.md)
 
 ## Play
 
@@ -60,12 +60,12 @@ Node.js 22+ on Linux or Ubuntu/WSL2:
 ```sh
 git clone https://github.com/gmmillar82/rareton.git
 cd rareton
-git checkout daa18b824dbf1e2c2f94757cc8c7d300a357e2d7
+git checkout c037a158fd5303b56bc474eae3f036f43a1a0415
 npm ci
 npm run dev
 ```
 
-Open `http://localhost:4173`. The FriendSDK v0.1.2 release archive is included in the repo. `npm run build:pages` produces the hosted build (see the RPC note below).
+Open `http://localhost:4173`. The FriendSDK v0.1.3 release archive is included in the repo. `npm run build:pages` produces the hosted build.
 
 ## Checks
 
@@ -80,14 +80,13 @@ The automated checks use the SDK's mock wallet and RPC. A real-wallet playthroug
 
 `npm run build:pages && node scripts/check-pages-build.mjs` plays the exact files deployed to GitHub Pages with the mock wallet. Pages asset links carry a `?v=<commit>` version so browsers never mix cached files from different deploys. Before this fix, a stale cached runtime could block seed purchases after an update.
 
-**RPC range limit (affects all FriendSDK v0.1.2 games):** in late September 2026 the public Robinhood RPC began rejecting `eth_getLogs` ranges over 10,000,000 blocks. FriendSDK v0.1.2 looks up a wallet's Friends with one owner-filtered query from block 0, so connecting failed with *"Could not load this account's Friend transfers"*. Rareton's hosted build replaces the CLI-generated runtime with [`host/runtime.tsx`](https://github.com/gmmillar82/rareton/blob/daa18b824dbf1e2c2f94757cc8c7d300a357e2d7/host/runtime.tsx). It uses the same `GameHost`, passing its documented `publicClient` option with a client that splits those owner-filtered queries into allowed ranges. It never scans the collection, and the fresh ownership check is unchanged. Verified against the live RPC: the unpatched lookup fails, and the patched one finds the Friend. `npm run dev` still uses the unmodified CLI runtime, so local wallet play is affected until the SDK or RPC is fixed.
+**FriendSDK v0.1.3:** Rareton uses the v0.1.3 hotfix, which keeps Friend discovery within the public Robinhood RPC's new 10,000,000-block `eth_getLogs` limit. Under v0.1.2, connecting failed with *"Could not load this account's Friend transfers"*. Verified against the live RPC: v0.1.3 discovers a real holder's Friend with the unmodified SDK runtime.
 
 ## Known limitations
 
 - Progress resets on reload, because the SDK sandbox has no storage.
 - Recipient Friend numbers aren't verified: any number shows its registry artwork, even if not minted.
 - Mobile requires a wallet's in-app browser.
-- The hosted build relies on the RPC workaround above until FriendSDK handles the new range limit.
 - Stamp spending isn't shown in the runtime's Friend wallet panel (see above).
 - No live minting, trading, wearable NFTs or creator fees.
 
