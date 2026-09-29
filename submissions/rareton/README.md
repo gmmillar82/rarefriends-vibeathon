@@ -1,10 +1,10 @@
 # Rareton
 
-Walk your Rare Friend around a cosy pixel village, chat with villagers, grow rare flowers from RF seed packets and post 16 × 16 pixel-art gifts, stamped in RF, to any other Rare Friend by number.
+Walk your Rare Friend around a cosy pixel village and the Whispering Woods beyond it. Chat with villagers, grow rare flowers from RF seed packets and make 16 × 16 pixel-art gifts, stamped in RF, for any other Rare Friend by number. Days turn to firefly-lit nights, rain showers pass through, and an original 8-bit waltz plays along.
 
 **Builder:** [@gmmillar82](https://github.com/gmmillar82) · **Category:** Character Spotlight (also relevant to Economy Potential) · **SDK:** FriendSDK v0.1.2
 
-Your own Generations NFT is the main character. Its canonical on-chain sprite walks the village, and every gift you address shows the recipient Friend's sprite, read live from the public artwork registry. [Source code](https://github.com/gmmillar82/rareton/tree/f47aee217c9dc8ef85641a3f36d8a3a7e9ecf25d) · [Game rules](https://github.com/gmmillar82/rareton/blob/f47aee217c9dc8ef85641a3f36d8a3a7e9ecf25d/games/rareton/README.md)
+Your own Generations NFT is the main character. Its canonical on-chain sprite walks the village, and every gift you address shows the recipient Friend's sprite, read live from the public artwork registry. [Source code](https://github.com/gmmillar82/rareton/tree/daa18b824dbf1e2c2f94757cc8c7d300a357e2d7) · [Game rules](https://github.com/gmmillar82/rareton/blob/daa18b824dbf1e2c2f94757cc8c7d300a357e2d7/games/rareton/README.md)
 
 ## Play
 
@@ -12,13 +12,16 @@ Your own Generations NFT is the main character. Its canonical on-chain sprite wa
 
 You need a browser wallet on **Robinhood mainnet (4663)** holding a hardwired Rare Friends Generations NFT (generation ≥ 1). The SDK runtime connects the wallet and verifies ownership with a read-only check. There are no signatures, transactions or RF funding. **On mobile**, open the game inside MetaMask's in-app browser ([MetaMask link](https://metamask.app.link/dapp/gmmillar82.github.io/rareton/)); regular mobile browsers have no wallet.
 
-**Controls:** WASD / arrow keys, or tap/click where to go. Press **E**, or tap a building, flower or villager (your Friend walks over), to interact. **Satchel** shows your items, simulated RF balance and sent gifts. **Settings** has sound (off by default), reduced motion and a day/night toggle.
+**Controls:** WASD / arrow keys, or tap/click where to go. Press **E**, or tap a building, flower or villager (your Friend walks over), to interact. **Satchel** shows your items, simulated RF balance and sent gifts. **Settings** has sound effects and music (both off by default), reduced motion, and day/night and weather toggles.
 
 **Rules:**
-- Pick daisies, tulips, bluebells, poppies and sunflowers in the east meadow, by the pond and near cottages. Each regrows 25 seconds after picking.
+- Pick daisies, tulips, bluebells, poppies and sunflowers in the east meadow, by the pond and near cottages. Each regrows 25 seconds after picking. Starbells (night only) grow in the woods.
 - Bramble's Bakery gives free honey buns (you can carry up to 3). The wishing well gives one daisy.
-- Four villagers chat, and two of them give you gifts.
+- Five villagers chat, and three of them give you gifts. At dusk they go home; at night you knock on their doors (E or tap) and chat through the door, with different night-time lines. The post office stays open.
 - A village day lasts four minutes. At night the lamps glow, windows light up and fireflies come out. You can turn the cycle off in Settings.
+- **Whispering Woods** lie west of the village, past the signpost: a winding path, mushrooms, Fern's hut and a glade of standing stones. **Starbells** grow in the stone circle and can only be picked at night, when they glow.
+- **Village life:** ducks on the pond (asleep at night), butterflies over the meadow, birds that flutter off when you walk up, and a ginger cat napping on a doorstep. You can pet her. Rain showers pass every few minutes and leave puddles, and bunting is strung from the square's lamps to the well.
+- **Music:** an original 8-bit soundtrack composed for Rareton and synthesised live with Web Audio (no recordings or third-party music). A wistful 3/4 waltz by day crossfades into a music-box lullaby at night.
 - At the **Seed stall**, buy a seed packet (1 RF) and plant it in the **community garden**. It blooms into one of six garden-only flowers with fixed RF values. Keep them for bouquets or sell them back at the stall.
 - At the **Post Office**, make a bouquet (1–3 flowers), a letter (6 messages) or a honey bun parcel. Type any Friend number, preview their sprite and your gift art, then press **Stamp & send**. Each gift needs a 0.1 RF stamp. Garden flowers in a bouquet carry their RF value to the recipient.
 
@@ -57,12 +60,12 @@ Node.js 22+ on Linux or Ubuntu/WSL2:
 ```sh
 git clone https://github.com/gmmillar82/rareton.git
 cd rareton
-git checkout f47aee217c9dc8ef85641a3f36d8a3a7e9ecf25d
+git checkout daa18b824dbf1e2c2f94757cc8c7d300a357e2d7
 npm ci
 npm run dev
 ```
 
-Open `http://localhost:4173`. The FriendSDK v0.1.2 release archive is included in the repo.
+Open `http://localhost:4173`. The FriendSDK v0.1.2 release archive is included in the repo. `npm run build:pages` produces the hosted build (see the RPC note below).
 
 ## Checks
 
@@ -70,20 +73,24 @@ All pass:
 - TypeScript typecheck (`npx tsc -p .`)
 - `friendsdk check` game validation and `friendsdk build`
 - `friendsdk test` automated browser smoke checks at 960 px and 360 px
-- A scripted walkthrough at 960 px and 360 px (`node scripts/smoke.mjs`): walk to the post office, address a letter (with a live artwork lookup), stamp and send it, then walk to the seed stall, buy a packet, plant it and check the bloom and satchel
+- A scripted walkthrough at 960 px and 360 px (`node scripts/smoke.mjs`): switch the music on and off, walk to the post office, address a letter (with a live artwork lookup), stamp and send it, walk to the seed stall, buy a packet, plant it, check the bloom and satchel, then walk west into the Whispering Woods
+- A night-time check: knock on Bramble's door and chat through it
 
-The automated checks use the SDK's mock wallet and RPC. A real-wallet playthrough on the hosted preview passed on desktop (MetaMask extension) and mobile (MetaMask in-app browser). It covered gifting, stamps, buying and planting seed packets, and the day/night cycle.
+The automated checks use the SDK's mock wallet and RPC. A real-wallet playthrough on the hosted preview passed on desktop (MetaMask extension) and mobile (MetaMask in-app browser). It covered gifting, stamps, buying and planting seed packets, day/night, the woods, weather, music and knocking on doors at night.
 
 `npm run build:pages && node scripts/check-pages-build.mjs` plays the exact files deployed to GitHub Pages with the mock wallet. Pages asset links carry a `?v=<commit>` version so browsers never mix cached files from different deploys. Before this fix, a stale cached runtime could block seed purchases after an update.
+
+**RPC range limit (affects all FriendSDK v0.1.2 games):** in late September 2026 the public Robinhood RPC began rejecting `eth_getLogs` ranges over 10,000,000 blocks. FriendSDK v0.1.2 looks up a wallet's Friends with one owner-filtered query from block 0, so connecting failed with *"Could not load this account's Friend transfers"*. Rareton's hosted build replaces the CLI-generated runtime with [`host/runtime.tsx`](https://github.com/gmmillar82/rareton/blob/daa18b824dbf1e2c2f94757cc8c7d300a357e2d7/host/runtime.tsx). It uses the same `GameHost`, passing its documented `publicClient` option with a client that splits those owner-filtered queries into allowed ranges. It never scans the collection, and the fresh ownership check is unchanged. Verified against the live RPC: the unpatched lookup fails, and the patched one finds the Friend. `npm run dev` still uses the unmodified CLI runtime, so local wallet play is affected until the SDK or RPC is fixed.
 
 ## Known limitations
 
 - Progress resets on reload, because the SDK sandbox has no storage.
 - Recipient Friend numbers aren't verified: any number shows its registry artwork, even if not minted.
 - Mobile requires a wallet's in-app browser.
+- The hosted build relies on the RPC workaround above until FriendSDK handles the new range limit.
 - Stamp spending isn't shown in the runtime's Friend wallet panel (see above).
 - No live minting, trading, wearable NFTs or creator fees.
 
 ## Credits
 
-Friend sprites are canonical Rare Friends artwork, used under the FriendSDK NOTICE. Player and recipient sprites are read live. The villagers use Friends #21, #77, #3 and #150, baked in from the public registry, with invented names and dialogue. Sounds come from the FriendSDK sound kit. The village, flowers and gift art are original pixel art drawn in code.
+Friend sprites are canonical Rare Friends artwork, used under the FriendSDK NOTICE. Player and recipient sprites are read live. The villagers use Friends #21, #77, #3, #150 and #88, baked in from the public registry, with invented names and dialogue. Sound effects come from the FriendSDK sound kit. The music is original, composed for Rareton and synthesised in code. The village, woods, animals, flowers and gift art are original pixel art drawn in code.
