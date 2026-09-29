@@ -2,7 +2,7 @@
 
 Walk your Rare Friend around a cosy pixel village and the Whispering Woods beyond it. Chat with villagers, grow rare flowers from RF seed packets and make 16 × 16 pixel-art gifts, stamped in RF, for any other Rare Friend by number. Days turn to firefly-lit nights, rain showers pass through, and an original 8-bit waltz plays along.
 
-**Builder:** [@gmmillar82](https://github.com/gmmillar82) · **Category:** Character Spotlight (also relevant to Economy Potential) · **SDK:** FriendSDK v0.1.4
+**Builder:** [@gmmillar82](https://github.com/gmmillar82) · Telegram @bombadil888 · **Category:** Character Spotlight (also relevant to Economy Potential) · **SDK:** FriendSDK v0.1.4
 
 Your own Generations NFT is the main character. Its canonical on-chain sprite walks the village, and every gift you address shows the recipient Friend's sprite, read live from the public artwork registry. [Source code](https://github.com/gmmillar82/rareton/tree/de7cd8596a3db79f5c0693c0cf39a69fe13ae491) · [Game rules](https://github.com/gmmillar82/rareton/blob/de7cd8596a3db79f5c0693c0cf39a69fe13ae491/games/rareton/README.md)
 
