@@ -4,7 +4,7 @@ Walk your Rare Friend around a cosy pixel village and the Whispering Woods beyon
 
 **Builder:** [@gmmillar82](https://github.com/gmmillar82) · Telegram @bombadil888 · **Category:** Character Spotlight (also relevant to Economy Potential) · **SDK:** FriendSDK v0.1.4
 
-Your own Generations NFT is the main character. Its canonical on-chain sprite walks the village, and every gift you address shows the recipient Friend's sprite, read live from the public artwork registry. [Source code](https://github.com/gmmillar82/rareton/tree/de7cd8596a3db79f5c0693c0cf39a69fe13ae491) · [Game rules](https://github.com/gmmillar82/rareton/blob/de7cd8596a3db79f5c0693c0cf39a69fe13ae491/games/rareton/README.md)
+Your own Generations NFT is the main character. Its canonical on-chain sprite walks the village, and every gift you address shows the recipient Friend's sprite, read live from the public artwork registry. [Source code](https://github.com/gmmillar82/rareton/tree/1d07ce898c71f487c8d7e3b642bf7bb05c561bb6) · [Game rules](https://github.com/gmmillar82/rareton/blob/1d07ce898c71f487c8d7e3b642bf7bb05c561bb6/games/rareton/README.md)
 
 ## Play
 
@@ -22,7 +22,7 @@ You need a browser wallet on **Robinhood mainnet (4663)** holding a hardwired Ra
 - **Whispering Woods** lie west of the village, past the signpost: a winding path, mushrooms, Fern's hut and a glade of standing stones. **Starbells** grow in the stone circle and can only be picked at night, when they glow.
 - **Village life:** ducks on the pond (asleep at night), butterflies over the meadow, birds that flutter off when you walk up, and a ginger cat napping on a doorstep. You can pet her. Rain showers pass every few minutes and leave puddles, and bunting is strung from the square's lamps to the well.
 - **Music:** an original 8-bit soundtrack composed for Rareton and synthesised live with Web Audio (no recordings or third-party music). A wistful 3/4 waltz by day crossfades into a music-box lullaby at night.
-- At the **Seed stall**, buy a seed packet (1 RF) and plant it in the **community garden**. It blooms into one of six garden-only flowers with fixed RF values. Keep them for bouquets or sell them back at the stall.
+- At the **Seed stall**, buy a seed packet (1 RF), then open the **community garden**. The screen fades into a detailed garden vista: perspective fields running to the mountains, a windmill village, a 3D planter, and your Friend and Sparkle in straw hats. Plant a packet and they water it, a bud grows (sometimes the cat dashes past), then press **Bloom!** to open it. The flower is already decided by the SDK when you plant; the button only chooses when it's revealed. Rare blooms get golden rays, and a moonflower turns the sky to starlit twilight. It blooms into one of six garden-only flowers with fixed RF values. Keep them for bouquets or sell them back at the stall.
 - At the **Post Office**, make a bouquet (1–3 flowers), a letter (6 messages) or a honey bun parcel. Type any Friend number, preview their sprite and your gift art, then press **Stamp & send**. Each gift needs a 0.1 RF stamp. Garden flowers in a bouquet carry their RF value to the recipient.
 
 Each gift is a 16 × 16 one-bit bitmap in the same format as Friend walking sprites, packed into a single uint256 "gift code". Letters carry a stamp derived from the recipient's number, so each is unique to its recipient.
@@ -60,7 +60,7 @@ Node.js 22+ on Linux or Ubuntu/WSL2:
 ```sh
 git clone https://github.com/gmmillar82/rareton.git
 cd rareton
-git checkout de7cd8596a3db79f5c0693c0cf39a69fe13ae491
+git checkout 1d07ce898c71f487c8d7e3b642bf7bb05c561bb6
 npm ci
 npm run dev
 ```
@@ -73,10 +73,10 @@ All pass:
 - TypeScript typecheck (`npx tsc -p .`)
 - `friendsdk check` game validation and `friendsdk build`
 - `friendsdk test` automated browser smoke checks at 960 px and 360 px
-- A scripted walkthrough at 960 px and 360 px (`node scripts/smoke.mjs`): switch the music on and off, walk to the post office, address a letter (with a live artwork lookup), stamp and send it, walk to the seed stall, buy a packet, plant it, check the bloom and satchel, then walk west into the Whispering Woods
+- A scripted walkthrough at 960 px and 360 px (`node scripts/smoke.mjs`): switch the music on and off, walk to the post office, address a letter (with a live artwork lookup), stamp and send it, walk to the seed stall, buy a packet, open the garden vista, plant it, press Bloom!, check the bloom and satchel, then walk west into the Whispering Woods
 - A night-time check: knock on Bramble's door and chat through it
 
-The automated checks use the SDK's mock wallet and RPC. A real-wallet playthrough on the hosted preview passed on desktop (MetaMask extension) and mobile (MetaMask in-app browser). It covered gifting, stamps, buying and planting seed packets, day/night, the woods, weather, music and knocking on doors at night.
+The automated checks use the SDK's mock wallet and RPC. A real-wallet playthrough on the hosted preview passed on desktop (MetaMask extension) and mobile (MetaMask in-app browser). It covered gifting, stamps, buying and planting seed packets (including the garden vista), day/night, the woods, weather, music and knocking on doors at night.
 
 `npm run build:pages && node scripts/check-pages-build.mjs` plays the exact files deployed to GitHub Pages with the mock wallet. Pages asset links carry a `?v=<commit>` version so browsers never mix cached files from different deploys. Before this fix, a stale cached runtime could block seed purchases after an update.
 
@@ -92,4 +92,4 @@ The automated checks use the SDK's mock wallet and RPC. A real-wallet playthroug
 
 ## Credits
 
-Friend sprites are canonical Rare Friends artwork, used under the FriendSDK NOTICE. Player and recipient sprites are read live. The villagers use Friends #21, #77, #3, #150 and #88, baked in from the public registry, with invented names and dialogue. Sound effects come from the FriendSDK sound kit. The music is original, composed for Rareton and synthesised in code. The village, woods, animals, flowers and gift art are original pixel art drawn in code.
+Friend sprites are canonical Rare Friends artwork, used under the FriendSDK NOTICE. Player and recipient sprites are read live. The villagers use Friends #21, #77, #3, #150 and #88, baked in from the public registry, with invented names and dialogue. Sound effects come from the FriendSDK sound kit. The music is original, composed for Rareton and synthesised in code. The village, woods, garden vista, animals, flowers and gift art are original pixel art drawn in code.
